@@ -1,0 +1,7 @@
+POST http://localhost:6396/auth/login
+
+Content-Type: application/json
+
+{
+    "hello": "hello"
+}

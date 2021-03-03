@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"target": "ES6",
+		"module": "CommonJS",
+		"sourceMap": true,
+		"outDir": "./build",
+		"moduleResolution": "node",
+		"strict": false,
+		"allowJs": true,
+		"experimentalDecorators": true,
+		"noUnusedLocals": true,
+		"esModuleInterop": true,
+		"emitDecoratorMetadata": true,
+		"paths": {
+			"neo-blessed": ["./@types/index.d.ts"]
+		}
+	},
+	"exclude": ["node_modules"]
+}

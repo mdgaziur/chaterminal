@@ -50,3 +50,16 @@ Not this
   - index.ts // handles all the argument parsing, contains the code for server and client
   ...
 ```
+
+## Environment variables
+
+Here is the template for .env file. Replace placeholder texts with appropiate values and place that in the project root directory.
+```env
+MONGODB_URI=your_uri_here
+JWT_SECRET_KEY=your_secret_here
+SMTP_SERVER=your_smtp_server_here
+SMTP_USERNAME=your_smtp_username_here
+SMTP_PASSWORD=your_smtp_password_here
+SMTP_PORT=your_smtp_port_here
+SMTP_SECURE=true or false
+```

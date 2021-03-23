@@ -11,12 +11,16 @@ Simple and convenient terminal chat application
 - "Who uses mouse when there is keyboard shortcuts?"
 
 ## Installation
-Currently Chaterminal is only available via github. Clone and cd to project directory. And then run ```install.sh```.
+See [Installation.md](./Installation.md)
 
 ## How to use
 There is virtually no learning curve. You only need to remember a few keyboard shortcuts to use it. And mouse is not supported officially :^)
 
 See [Shortcuts.md](./Shortcuts.md) for keyboard shortcuts
+
+For server, follow the instruction in [Installation.md](./Installation.md) and start chaterminal with ```-s``` flag.
+
+For more flags, run ```chaterminal -h```
 
 ## Contributing
 See [Contributing.md](./Contributing.md)

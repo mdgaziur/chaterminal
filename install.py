@@ -13,7 +13,7 @@ if(uname().system.lower() != 'linux'):
 BUILD_COMMAND = shlex.split("yarn tsc")
 CHMOD_COMMAND = shlex.split(f"chmod +x /usr/bin/chaterminal")
 RUNNER_APP = f'''#!/usr/bin/env node
-require("{("/usr/bin/Chaterminal/app")}")
+require("{("/usr/bin/Chaterminal")}")
 '''
 if os.geteuid() != 0:
     print("Root access is required!")
@@ -22,7 +22,7 @@ if os.geteuid() != 0:
 print("Welcome to the installer")
 # check for existing installation
 if(os.path.exists(("/usr/bin/Chaterminal")) or os.path.exists("/usr/bin/chaterminal")):
-    print("A previous installation was found do you want to keep it?(Will terminate the installer if yes)?")
+    print("A previous installation was found do you want to continue?(Will terminate the installer if yes)?")
     i = input()
     if(i.startswith('Y') or i.startswith('y')):
         print("Removing the previous installation...")
@@ -79,8 +79,7 @@ if buildProcess.returncode != 0:
 
 print("Copying compiled files to install directory...")
 
-os.mkdir(('/usr/bin/Chaterminal'))
-copytree("build", ("/usr/bin/Chaterminal/app"))
+copytree("build", ("/usr/bin/Chaterminal"))
 
 print("Copying executable files to install directory")
 with open('/usr/bin/chaterminal', "w") as fp:
@@ -98,4 +97,4 @@ if chmodProcess.returncode != 0:
     exit(1)
 
 print("Copying dependencies to install directory...")
-copytree('./node_modules', ("/usr/bin/Chaterminal/app/node_modules"))
+copytree('./node_modules', ("/usr/bin/Chaterminal/node_modules"))

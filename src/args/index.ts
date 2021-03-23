@@ -2,6 +2,7 @@ import { exit } from "process";
 import { client } from "../client";
 import { log, type } from "../io/log";
 import server from "../server";
+import { rmConfig } from '../client/config/rmConfig';
 
 function printArgsHelp() {
     log(`
@@ -11,6 +12,7 @@ Available arguments:
 -h\t\t\tShows this message
 -s\t\t\tStarts the server
 -n\t\t\tIt's same as starting the app without arguments. Starts chat client.
+-r\t\t\tRemoves the config file
 `);
 }
 
@@ -30,6 +32,9 @@ export default function useArgs() {
     else if(command === "-n") {
         client();
         exit(0);
+    }
+    else if(command === "-r") {
+        rmConfig();
     }
     else {
         log("Unknown argument!", type.ERROR, false);

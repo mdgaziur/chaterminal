@@ -12,7 +12,7 @@ import { userExistsUsingEmail } from "../../validators/exists";
 
 const router = Router();
 router.post(
-	"/getToken",
+	"/gettoken",
 	[
 		body("email")
 			.notEmpty()
@@ -53,11 +53,12 @@ router.post(
 				},
 			);
 			let template = readFileSync(
-				__dirname + "../../templates/passwordResetTemplate.html",
+				__dirname + "/../../templates/passwordResetTemplate.html",
 			);
 			let mailBody = template.toString();
-			mailBody.replace("{%email%}", user.email);
-			mailBody.replace("{%token%}", token);
+			mailBody = mailBody.replace("{%email%}", user.email);
+			mailBody = mailBody.replace("{%email%}", user.email); // 2 email placeholders
+			mailBody = mailBody.replace("{%token%}", token);
 			try {
 				transporter.sendMail({
 					to: user.email,
@@ -113,18 +114,21 @@ router.post(
 				if (!payload.resetToken) {
 					throw new Error();
 				}
-				let user = await getModelForClass(User).findOne(userId);
+				let user = await getModelForClass(User).findOne({
+					_id: userId
+				});
 				if (!user) {
 					res.status(404);
 					res.end();
 				} else {
-					let saltedPassword = hashSync(user.password, 10);
+					let saltedPassword = hashSync(req.body.password, 10);
 					user.password = saltedPassword;
-					user.save();
+					await user.save();
 					res.status(200);
 					res.end();
 				}
 			} catch (e) {
+				log(e, type.ERROR);
 				res.status(403);
 				res.end();
 			}

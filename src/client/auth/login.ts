@@ -2,6 +2,8 @@ import fetch, { Response } from "node-fetch";
 import { log, type } from "../../io/log";
 import ora from "ora";
 import { getPassword, getUsername } from "../../io/creds";
+import { question } from "../../io/question";
+import { passwordReset } from './passwordreset';
 
 export async function getTokenForUser(server: string): Promise<string> {
 	log("Let's log in!");
@@ -31,6 +33,10 @@ export async function getTokenForUser(server: string): Promise<string> {
 		}
 		if(resp.status === 403) {
 			log("Wrong Password!", type.ERROR);
+			let answer = await question("Do you want to reset your password?", "Y");
+			if(answer) {
+				await passwordReset(server);
+			}
 		}
 		else if(!resp.ok) {
 			let json = await resp.json();
